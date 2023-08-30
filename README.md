@@ -1,2 +1,0 @@
-# jarod_crider_unmanned_systems
-Unmanned Systems
