@@ -1,3 +1,4 @@
 git commit -m "Message"
 git commit			
+git add .
 git push		send to git hub
