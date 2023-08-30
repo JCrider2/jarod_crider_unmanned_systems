@@ -55,3 +55,13 @@ git status
 git commit -m "Help"
 git add .
 git push
+git add .
+git push
+git commit
+git commit
+git commit
+git commit -m "Change Text help"
+git
+git commit
+git add .
+git push

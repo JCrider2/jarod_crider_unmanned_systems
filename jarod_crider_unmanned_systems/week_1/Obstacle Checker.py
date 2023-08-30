@@ -72,9 +72,9 @@ def is_not_valid(obst_list:list,x_min:int,y_min:int,x_max:int,y_max:int,
 
 
 if __name__ == '__main__':
-    obstacle_positions = [(1,1),(4,4),(3,4),(5,0),(5,1),(0,7)]
+    obstacle_positions = [(1,1),(4,4),(3,4),(5,0),(5,1),(0,7),(1,7),(2,7),(3,7)]
     obstacle_list = [] # Store obstacle classes
-    obstacle_radius = 0.25
+    obstacle_radius = 0.5
     
     
     # loop through positon of obstacles 
@@ -97,17 +97,7 @@ if __name__ == '__main__':
             
             
             
-    if x_min > x_curr:
-        return True
-    if x_max < x_curr:
-        return True
-    if y_min > y_curr:
-        return True
-    if y_max < y_curr:
-        return True        
-            
-            
-            
+
             
             
     fig, ax = plt.subplots()
