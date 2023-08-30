@@ -65,3 +65,10 @@ git
 git commit
 git add .
 git push
+git add .
+git push
+git commit
+git add .
+git commit -m "Dijkstra"
+git add .
+git push

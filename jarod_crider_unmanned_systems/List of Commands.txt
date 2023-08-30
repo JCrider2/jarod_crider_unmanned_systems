@@ -2,3 +2,9 @@ git commit -m "Message"
 git commit			
 git add .
 git push		send to git hub
+
+
+
+git commit - m "Message" 	this is to copy 
+git add .			this is to add to sending directory
+git push 			this sends to githbu
