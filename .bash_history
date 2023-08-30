@@ -72,3 +72,7 @@ git add .
 git commit -m "Dijkstra"
 git add .
 git push
+git commit -m "Update"
+git add .
+git commit -m "Update"
+git push

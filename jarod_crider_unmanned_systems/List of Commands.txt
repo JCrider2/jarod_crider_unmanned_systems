@@ -5,6 +5,7 @@ git push		send to git hub
 
 
 
-git commit - m "Message" 	this is to copy 
-git add .			this is to add to sending directory
+ 
+git add .			this is to copy
+git commit -m "Message" 	this is to add to sending directory
 git push 			this sends to githbu
