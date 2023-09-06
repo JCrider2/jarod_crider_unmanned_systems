@@ -6,7 +6,6 @@ Created on Sat Sep  2 09:12:09 2023
 """
 # DijkstraFunTime Redo
 import DijkstraFunTime as Dft
-from operator import attrgetter
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -43,10 +42,10 @@ if __name__ == "__main__":
     
     # Initialize data used in Dijkstra's
     parent_index = Dft.compute_index(xmin,xmax,ymin,ymax,gs,x_finish,y_finish)
-    last_node = Dft.node(x_finish,y_finish,parent_index,0.0,parent_index)
+    last_node = Dft.node(x_finish,y_finish,parent_index,0.0)
     unvisited[parent_index] = last_node
     current_index = Dft.compute_index(xmin,xmax,ymin,ymax,gs,x_start,y_start)
-    current_node = Dft.node(x_start,y_start,0.0,-1,current_index)
+    current_node = Dft.node(x_start,y_start,0.0,-1)
     
     while unvisited:
         
@@ -73,7 +72,7 @@ if __name__ == "__main__":
                             # Comparing new calculated cost with old calculated cost
                             if old_cost_scan > new_cost_scan:
                                 node_scan.cost = new_cost_scan
-                                node_scan.parent_index = current_node.index
+                                node_scan.parent_index = index
                                 unvisited[i_scan] = node_scan
                             else:
                                 pass
@@ -85,15 +84,15 @@ if __name__ == "__main__":
                         # Scan node is new
                         else:
                             cost_scan = Dft.distance(x_scan,current_node.x,y_scan,current_node.y)+current_node.cost
-                            node = Dft.node(x_scan,y_scan,cost_scan,index,i_scan)
+                            node = Dft.node(x_scan,y_scan,cost_scan,index)
                             unvisited[i_scan] = node
                     else:
                         pass
         
         # Move current node to visited, find lowest cost select that, and delete
         visited.update({index:current_node})
-        current_node = min(unvisited.values(), key=attrgetter('cost'))
-        del unvisited[current_node.index]
+        index = min(unvisited, key=lambda x:unvisited[x].cost)
+        current_node = unvisited.pop(index)
                     
     # Getting cordinates from finish to start    
     while parent_index != -1:

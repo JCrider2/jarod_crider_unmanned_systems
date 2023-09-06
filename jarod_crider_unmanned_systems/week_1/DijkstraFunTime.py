@@ -16,12 +16,11 @@ import numpy as np
             - x,y,parent_cost,index
 """
 class node:
-    def __init__(self,x:float,y:float,cost:float,parent_index:int,index:int):
+    def __init__(self,x:float,y:float,cost:float,parent_index:int):
         self.x = x
         self.y = y
         self.cost = cost
         self.parent_index = parent_index
-        self.index = index
 
 """
     - object data class

@@ -88,3 +88,6 @@ git add .
 git commmit -m "Updating DijkstraFun to match desired radius"
 git commit -m "Updating DijkstraFun to match desired radius"
 git push
+git add .
+git commit -m "Adding distance file, updating others"
+git push
