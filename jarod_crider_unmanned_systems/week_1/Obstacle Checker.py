@@ -66,28 +66,23 @@ class Obstacle():
 
 """
 
-def is_not_valid(obst_list:list,x_curr:float,y_curr:float,agent_radius:float=0.0):
-    
-    
-    for obs in obst_list:
-        if obs.is_inside(x_curr, y_curr,agent_radius):
-            print("You're dead at ", obs.x_pos, obs.y_pos)
-            return True    
-    
-    
-    # if (x_min > x_curr) or (x_max < x_curr):
-    #     return True
-
-    return False
 
 
+def valid_check(x_min:float,x_max:float,y_min:float,y_max:float,
+                  x_curr:float,y_curr:float,obst_list:list,robot_radius:float=0.0):    
+    for jar in obst_list:
+        if jar.is_inside(x_curr,y_curr,robot_radius):
+            return False     
+    if x_min <= x_curr <= x_max and y_min <= y_curr <= y_max:
+        return True    # Inside barrier
+    return False     # Outside barrier
 
 
 
 if __name__ == '__main__':
     obstacle_positions = [(1,1),(4,4),(3,4),(5,0),(5,1),(0,7),(1,7),(2,7),(3,7)]
     obstacle_list = [] # Store obstacle classes
-    obstacle_radius = 0.5
+    obstacle_radius = 0.25
     
     
     # loop through positon of obstacles 
@@ -96,8 +91,8 @@ if __name__ == '__main__':
         obstacle = Obstacle(obs_pos[0], obs_pos[1], obstacle_radius)
         obstacle_list.append(obstacle)
     
-    agent_x = 1
-    agent_y = 5
+    agent_x = 2
+    agent_y = 2
     agent_radius = 0.5
     
     for obs in obstacle_list:

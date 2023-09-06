@@ -84,3 +84,7 @@ git commit
 git add .
 git commit -m "Update"
 git push
+git add .
+git commmit -m "Updating DijkstraFun to match desired radius"
+git commit -m "Updating DijkstraFun to match desired radius"
+git push
