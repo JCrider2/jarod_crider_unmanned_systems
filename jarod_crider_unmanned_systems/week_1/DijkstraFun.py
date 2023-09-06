@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 if __name__ == "__main__":
     
     obstacle_positions = [(1,1),(4,4),(3,4),(5,0),(5,1),(0,7),(1,7),(2,7),(3,7)]
-    obstacle_list = [] # Store obstacle classes
-    obstacle_radius = 0.5
+    obstacle_list = [] # Store obstacle objects
+    obstacle_radius = 0.25
     
     xmin = 0
     xmax = 10   # Map Sizing
@@ -30,8 +30,9 @@ if __name__ == "__main__":
 
     robot_radius = 0.5
     
+    # Change obstalce's from list of tuples into list of objects
     for obs_pos in obstacle_positions:
-        obstacle = Dft.Obstacle(obs_pos[0], obs_pos[1], obstacle_radius)    # Change the obstacle form
+        obstacle = Dft.Obstacle(obs_pos[0], obs_pos[1], obstacle_radius)    
         obstacle_list.append(obstacle)
 
     visited = {}
@@ -40,6 +41,7 @@ if __name__ == "__main__":
     x_list = []     #Final cord lists
     y_list = []
     
+    # Initialize data used in Dijkstra's
     parent_index = Dft.compute_index(xmin,xmax,ymin,ymax,gs,x_finish,y_finish)
     last_node = Dft.node(x_finish,y_finish,parent_index,0.0,parent_index)
     unvisited[parent_index] = last_node
@@ -56,39 +58,52 @@ if __name__ == "__main__":
                 if i == 0 and j == 0: # Used to skip looking center of 3x3
                     pass
                 else:
+                    # get that scaned x,y,index values
                     x_scan = current_node.x+i*gs
                     y_scan = current_node.y+j*gs
                     i_scan = Dft.compute_index(xmin,xmax,ymin,ymax,gs,x_scan,y_scan)
                     if Dft.valid_check(xmin,xmax,ymin,ymax,x_scan,y_scan,obstacle_list,robot_radius):
                         
+                        # Was the scan node already scanned
                         if i_scan in unvisited:
                             node_scan = unvisited[i_scan]
                             old_cost_scan = node_scan.cost
                             new_cost_scan = Dft.distance(node_scan.x,current_node.x,node_scan.y,current_node.y)+current_node.cost
+                            
+                            # Comparing new calculated cost with old calculated cost
                             if old_cost_scan > new_cost_scan:
                                 node_scan.cost = new_cost_scan
                                 node_scan.parent_index = current_node.index
                                 unvisited[i_scan] = node_scan
                             else:
                                 pass
+                            
+                        # Is the scanned node visited already
                         elif i_scan in visited:
                             continue
+                        
+                        # Scan node is new
                         else:
                             cost_scan = Dft.distance(x_scan,current_node.x,y_scan,current_node.y)+current_node.cost
                             node = Dft.node(x_scan,y_scan,cost_scan,index,i_scan)
                             unvisited[i_scan] = node
                     else:
                         pass
+        
+        # Move current node to visited, find lowest cost select that, and delete
         visited.update({index:current_node})
         current_node = min(unvisited.values(), key=attrgetter('cost'))
         del unvisited[current_node.index]
                     
+    # Getting cordinates from finish to start    
     while parent_index != -1:
         back = visited[parent_index]
         x_list.append(back.x)
         y_list.append(back.y)
         parent_index = back.parent_index
 
+
+    # Plotting/Graphing
     fig, ax = plt.subplots()
     ax.set_xlim(0, 10)
     ax.set_ylim(0, 10)
@@ -101,6 +116,7 @@ if __name__ == "__main__":
     for obs in obstacle_list:
         obs_plot = plt.Circle((obs.x_pos, obs.y_pos), obs.radius, color="blue")
         ax.add_patch(obs_plot)
+    plt.grid()
     plt.show()
 
 

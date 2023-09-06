@@ -45,7 +45,7 @@ class Obstacle():
         """
         
         dist_from = np.sqrt((curr_x - self.x_pos)**2+ (curr_y - self.y_pos)**2)
-        if dist_from >= self.radius+robot_radius:
+        if dist_from > self.radius+robot_radius:
             return False
         return True
 
