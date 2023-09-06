@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Compute Index based on grid size and location
-def compute_index(min_x:int, max_x:int, min_y:int, max_y, gs:int, x_curr:int, y_curr:int) -> int:
+def compute_index(min_x:int, max_x:int, min_y:int, max_y, gs:float, x_curr:int, y_curr:int) -> int:
     
     index = ((x_curr - min_x)/gs) + (((y_curr - min_y)/gs) * ((max_x-min_x+gs)/gs))
     
@@ -23,8 +23,8 @@ min_y = 0
 max_y = 10
 gs = 0.5
 x_array = []
-x_curr = 7
-y_curr = 3.5
+x_curr = 0.0
+y_curr = 0.5
 
 index = compute_index(min_x,max_x,min_y,max_y,gs,x_curr,y_curr)
 print(index)

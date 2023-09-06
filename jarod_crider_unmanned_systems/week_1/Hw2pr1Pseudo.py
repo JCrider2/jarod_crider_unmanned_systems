@@ -51,15 +51,15 @@ def is_inside_obstacle(obs_x:float,obs_y:float,obs_radius:float,curr_x:float,cur
 
 min_x = 0
 max_x = 10
-min_y = 0
+min_y = 0       # Grid boundary
 max_y = 10
 
 
 obs_x = 5
-obs_y = 5
+obs_y = 5       # Object location
 obs_radius = 1
 
-agent_x =  4
+agent_x =  4        # Bot
 agent_y = 5
 
 obstacle_plot = plt.Circle((obs_x,obs_y), obs_radius, color='blue')

@@ -76,3 +76,8 @@ git commit -m "Update"
 git add .
 git commit -m "Update"
 git push
+git add .
+git commit -m "Update"
+git push
+git add .
+git commit

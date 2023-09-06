@@ -66,9 +66,22 @@ class Obstacle():
 
 """
 
-def is_not_valid(obst_list:list,x_min:int,y_min:int,x_max:int,y_max:int,
-                 x_curr:float,y_curr:float,agent_radius:float=0.0):
-    print("")
+def is_not_valid(obst_list:list,x_curr:float,y_curr:float,agent_radius:float=0.0):
+    
+    
+    for obs in obst_list:
+        if obs.is_inside(x_curr, y_curr,agent_radius):
+            print("You're dead at ", obs.x_pos, obs.y_pos)
+            return True    
+    
+    
+    # if (x_min > x_curr) or (x_max < x_curr):
+    #     return True
+
+    return False
+
+
+
 
 
 if __name__ == '__main__':
@@ -84,7 +97,7 @@ if __name__ == '__main__':
         obstacle_list.append(obstacle)
     
     agent_x = 1
-    agent_y = 1
+    agent_y = 5
     agent_radius = 0.5
     
     for obs in obstacle_list:
@@ -96,7 +109,7 @@ if __name__ == '__main__':
             print("You're outside the position", obs.x_pos, obs.y_pos)
             
             
-            
+
 
             
             
