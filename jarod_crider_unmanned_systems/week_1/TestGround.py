@@ -6,16 +6,14 @@ Created on Fri Sep  1 10:14:56 2023
 """
 
 
-import numpy as np
-
-def distance(x1:float,x2:float,y1:float,y2:float):
-    out = np.sqrt((x2-x1)**2+(y1-y2)**2)
-    return out
 
 
-x1 = 2
-x2 = 3
-y1 = 1
-y2 = x2
 
-z = distance(x1,x2,y1,y2)
+test = {1:8,2:8,3:8,4:8}
+
+while test:
+    print("test")
+    
+    if 1 in test.keys():
+        break
+print("works")

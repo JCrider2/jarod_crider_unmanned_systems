@@ -91,3 +91,10 @@ git push
 git add .
 git commit -m "Adding distance file, updating others"
 git push
+git add .
+git commit -m "change dijkstraFun, way it find's minimum value in unvisited"
+git push
+cd c/
+cd c/Users/Jarod/OneDrive/Documents/Mec459/jarod_crider_unmanned_systems
+cd c/Users/Jarod/Onedrive/Documents/Mec459/jarod_crider_unmanned_systems
+cd /c/Users/Jarod/Onedrive/Documents/Mec459/jarod_crider_unmanned_systems
