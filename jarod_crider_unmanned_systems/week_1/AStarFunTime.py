@@ -74,6 +74,8 @@ def distance(x1:float,x2:float,y1:float,y2:float):
         -Inputs
             - graph size x_min, x_max, y_min, y_max, gs,
                 x_curr, y_curr, robot radius
+        -BlackBox
+            - Barrier inclusive, iterate through obstacle list.
         - Outputs
             True - inbounds, no object
             False - out of bounds or object interference

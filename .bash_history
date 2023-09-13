@@ -98,3 +98,19 @@ cd c/
 cd c/Users/Jarod/OneDrive/Documents/Mec459/jarod_crider_unmanned_systems
 cd c/Users/Jarod/Onedrive/Documents/Mec459/jarod_crider_unmanned_systems
 cd /c/Users/Jarod/Onedrive/Documents/Mec459/jarod_crider_unmanned_systems
+pwd
+git init
+git config --global user.name "Jarod"
+git config --global user.name "jdcw8f@umsystem.edu"
+cd /c/User/Jarod/OneDrive/Documetns/Mec459/jarod_crider_unmanned_systems.edu
+cd /c/User/Jarod/OneDrive/Documetns/Mec459/jarod_crider_unmanned_systems
+cd /c/User/Jarod/OneDrive/Documents/Mec459/jarod_crider_unmanned_systems
+cd /c/Users/Jarod/OneDrive/Documents/Mec459/jarod_crider_unmanned_systems
+pwd
+git config
+git remote add origin https://github.com/JCrider2/jarod_crider_unmanned_systems.git
+git init
+git add .
+git commit -m "Hi"
+git pushy
+git push

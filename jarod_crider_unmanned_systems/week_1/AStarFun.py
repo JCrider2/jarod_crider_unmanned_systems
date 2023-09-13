@@ -21,8 +21,8 @@ if __name__ == "__main__":
     ymax = 10
     gs = 0.5
     
-    x_start = 0.0
-    y_start = 0.0 # Start
+    x_start = 0
+    y_start = 0 # Start
     
     x_finish = 8.0 # Finish
     y_finish = 9.0
@@ -99,10 +99,11 @@ if __name__ == "__main__":
         current_node = unvisited.pop(index)
         if parent_index in visited.keys():
             break
-                    
+    path = []                
     # Getting cordinates from finish to start    
     while parent_index != -1:
         back = visited[parent_index]
+        path.append(back)
         x_list.append(back.x)
         y_list.append(back.y)
         parent_index = back.parent_index
@@ -118,8 +119,13 @@ if __name__ == "__main__":
     plt.plot(x_list,y_list)
 
 
+    for rob in path:
+        rob_plot = plt.Circle((rob.x,rob.y), robot_radius, color="red")
+        ax.add_patch(rob_plot)
+
     for obs in obstacle_list:
         obs_plot = plt.Circle((obs.x_pos, obs.y_pos), obs.radius, color="blue")
         ax.add_patch(obs_plot)
+        
     plt.grid()
     plt.show()
