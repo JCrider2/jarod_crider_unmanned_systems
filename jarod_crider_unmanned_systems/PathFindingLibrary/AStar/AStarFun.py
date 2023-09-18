@@ -5,29 +5,27 @@ Created on Wed Sep  6 12:44:18 2023
 @author: Jarod
 """
 
-import AStarFunTime as Asf
+from AStar import AStarFunTime as Asf
 import numpy as np
 import matplotlib.pyplot as plt
 
-if __name__ == "__main__":
+def AStarFun(map:list,obstacle_positions:list,obstacle_radius:float,start:tuple,finish:tuple,robot_radius:float):
     
-    obstacle_positions = [(1,1),(4,4),(3,4),(5,0),(5,1),(0,7),(1,7),(2,7),(3,7)]
-    obstacle_list = [] # Store obstacle objects
-    obstacle_radius = 0.25
-    
-    xmin = 0
-    xmax = 10   # Map Sizing
-    ymin = 0
-    ymax = 10
-    gs = 0.5
-    
-    x_start = 0
-    y_start = 0 # Start
-    
-    x_finish = 8.0 # Finish
-    y_finish = 9.0
 
-    robot_radius = 0.5
+
+    obstacle_list = [] # Store obstacle objects
+    
+    xmin = map[0][0]
+    xmax = map[0][1]   # Map Sizing
+    ymin = map[1][0]  
+    ymax = map[1][1]
+    gs = map[2]
+    
+    x_start = start[0]
+    y_start = start[1] # Start
+    
+    x_finish = finish[0] # Finish
+    y_finish = finish[1]
     
     # Change obstalce's from list of tuples into list of objects
     for obs_pos in obstacle_positions:
@@ -129,3 +127,4 @@ if __name__ == "__main__":
         
     plt.grid()
     plt.show()
+    return x_list,y_list
