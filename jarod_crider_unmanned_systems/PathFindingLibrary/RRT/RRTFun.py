@@ -102,7 +102,6 @@ if __name__ == "__main__":
         y_list.append(back.y)
         i_new = back.parent_iter
     
-    
     # Plotting/Graphing
     fig, ax = plt.subplots()
     ax.set_xlim(0, 10)
@@ -111,11 +110,27 @@ if __name__ == "__main__":
     y_list = np.array(y_list)
     plt.plot(x_list,y_list)
     
+    for value in node.values():
+        plt.figure()
+        x1 = value.x
+        y1 = value.y
+        pi = value.parent_iter
+        if pi == -1:
+            continue
+        parent_node = node[pi]
+        x2 = parent_node.x
+        y2 = parent_node.y
+        plt.plot(x1,y1,x2,y2)
+        
     for obs in obstacle_list:
         obs_plot = plt.Circle((obs.x_pos, obs.y_pos), obs.radius, color="blue")
         ax.add_patch(obs_plot)
     plt.grid()
     plt.show()
+    
+
+    
+    
     
     print(cost_curr+2*step_size)
     
