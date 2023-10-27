@@ -100,6 +100,10 @@ def compute_index(min_x:float, max_x:float, min_y:float, max_y:float,
     index = ((curr_x - min_x)/gs) + (((curr_y - min_y)/gs) * ((max_x-min_x+gs)/gs))
     
     return index
+
+def merge(x,y):
+    merged_list = [(x[i], y[i]) for i in range(0, len(x))]
+    return merged_list
             
 """
     -Dijkstra's Algorithm

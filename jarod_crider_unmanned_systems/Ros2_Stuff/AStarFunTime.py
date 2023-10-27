@@ -1,25 +1,30 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Sep 13 12:23:48 2023
+Created on Wed Sep  6 12:42:44 2023
 
 @author: Jarod
 """
-# RRT
+
+# -*- coding: utf-8 -*-
+
+
+# Dijkstra' Fun Time
+
 
 import numpy as np
 
 """
-        - node data class
-            - Attributes
-                - x,y,parent_cost,index
+    - node data class
+        - Attributes
+            - x,y,parent_cost,index
 """
 class node:
-    def __init__(self,x:float,y:float,parent_iter:int,cost:float):
+    def __init__(self,x:float,y:float,cost:float,parent_index:int,heuretic_cost:float):
         self.x = x
         self.y = y
-        self.parent_iter = parent_iter
         self.cost = cost
-        
+        self.parent_index = parent_index
+        self.heuretic_cost = heuretic_cost
 
 """
     - object data class
@@ -69,6 +74,8 @@ def distance(x1:float,x2:float,y1:float,y2:float):
         -Inputs
             - graph size x_min, x_max, y_min, y_max, gs,
                 x_curr, y_curr, robot radius
+        -BlackBox
+            - Barrier inclusive, iterate through obstacle list.
         - Outputs
             True - inbounds, no object
             False - out of bounds or object interference
@@ -82,12 +89,30 @@ def valid_check(x_min:float,x_max:float,y_min:float,y_max:float,
         return True    # Inside barrier
     return False     # Outside barrier
 
-def merge(x,y):
-    merged_list = [(x[i], y[i]) for i in range(0, len(x))]
-    return merged_list
+"""
+    -Compute index value
+        - Inputs
+            - graph size min_x, max_x, min_y, max_y, gs, curr_x, curr_y
+"""
+def compute_index(min_x:float, max_x:float, min_y:float, max_y:float,
+                  gs:float, curr_x:float, curr_y:int):
+    
+    index = ((curr_x - min_x)/gs) + (((curr_y - min_y)/gs) * ((max_x-min_x+gs)/gs))
+    
+    return index
+            
+"""
+    -Dijkstra's Algorithm
+        - Inputs
+            - Starting Node
+            - Ending Node
+            - Obstacle List
+            - Map Boundary
+        -Outputs
+            - Chart/Graph/Plot results
+            - Overall cost/distance from starting done to ending node
+        - BlackBox
+            - Each node chosen has a parent node 
+            - A will have iterative cost added, and the preivous node to parent node
 
-def Reverse(lst):
-   new_lst = lst[::-1]
-   return new_lst
-
-
+"""

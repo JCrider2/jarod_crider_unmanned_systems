@@ -15,6 +15,10 @@ import numpy as np
         - Attributes
             - x,y,parent_cost,index
 """
+def merge(x,y):
+    merged_list = [(x[i], y[i]) for i in range(0, len(x))]
+    return merged_list
+
 class node:
     def __init__(self,x:float,y:float,cost:float,parent_index:int):
         self.x = x

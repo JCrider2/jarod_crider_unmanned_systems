@@ -9,9 +9,9 @@ Created on Wed Sep 13 12:23:48 2023
 import numpy as np
 
 """
-        - node data class
-            - Attributes
-                - x,y,parent_cost,index
+    - node data class
+        - Attributes
+            - x,y,parent_cost,index
 """
 class node:
     def __init__(self,x:float,y:float,parent_iter:int,cost:float):
@@ -86,8 +86,6 @@ def merge(x,y):
     merged_list = [(x[i], y[i]) for i in range(0, len(x))]
     return merged_list
 
-def Reverse(lst):
-   new_lst = lst[::-1]
-   return new_lst
+
 
 

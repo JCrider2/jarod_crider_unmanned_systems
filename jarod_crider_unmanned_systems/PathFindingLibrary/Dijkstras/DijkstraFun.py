@@ -6,13 +6,11 @@ Created on Sat Sep  2 09:12:09 2023
 """
 # DijkstraFunTime Redo
 from Dijkstras import DijkstraFunTime as Dft
-import numpy as np
-import matplotlib.pyplot as plt
 
-def DijkstraFun(map:list,obstacle:list,obstacle_radius:float,start:tuple,finish:tuple,robot_radius:float):
+def DijkstraFun(map:list,obstacle_x:list,obstacle_y:list,obstacle_radius:float,start:tuple,finish:tuple,robot_radius:float):
     
-
-    obstacle_positions = [(1,1),(4,4),(3,4),(5,0),(5,1),(0,7),(1,7),(2,7),(3,7)]
+    obstacle_positions = Dft.merge(obstacle_x,obstacle_y)
+    
     obstacle_list = [] # Store obstacle objects
     
     xmin = map[0][0]
@@ -44,7 +42,6 @@ def DijkstraFun(map:list,obstacle:list,obstacle_radius:float,start:tuple,finish:
     parent_index = Dft.compute_index(xmin,xmax,ymin,ymax,gs,x_finish,y_finish)
     last_node = Dft.node(x_finish,y_finish,parent_index,0.0)
     unvisited[parent_index] = last_node
-    current_index = Dft.compute_index(xmin,xmax,ymin,ymax,gs,x_start,y_start)
     current_node = Dft.node(x_start,y_start,0.0,-1)
     index = Dft.compute_index(xmin,xmax,ymin,ymax,gs,current_node.x,current_node.y)
     
@@ -94,31 +91,32 @@ def DijkstraFun(map:list,obstacle:list,obstacle_radius:float,start:tuple,finish:
         visited.update({index:current_node})
         index = min(unvisited, key=lambda x:unvisited[x].cost)
         current_node = unvisited.pop(index)
-                    
+        
     # Getting cordinates from finish to start    
     while parent_index != -1:
         back = visited[parent_index]
+
         x_list.append(back.x)
         y_list.append(back.y)
         parent_index = back.parent_index
 
-    # Plotting/Graphing
-    fig, ax = plt.subplots()
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 10)
+    x_list.reverse()
+    y_list.reverse()
 
-    x_list = np.array(x_list)
-    y_list = np.array(y_list)
-    plt.plot(x_list,y_list)
-
-
-    for obs in obstacle_list:
-        obs_plot = plt.Circle((obs.x_pos, obs.y_pos), obs.radius, color="blue")
-        ax.add_patch(obs_plot)
-    plt.grid()
-    plt.show()
-
-
-    return x_list,y_list
-
-
+    cord_list = Dft.merge(x_list,y_list)
+    
+    final_cost = 0
+    
+    look = len(cord_list)-1
+    
+    for t in range(look):
+        Ax = cord_list[t][0]
+        Ay = cord_list[t][1]
+        Bx = cord_list[t+1][0]
+        By = cord_list[t+1][1]
+        
+        
+        final_cost += Dft.distance(Ax,Bx,Ay,By)
+    
+    
+    return (cord_list,final_cost)

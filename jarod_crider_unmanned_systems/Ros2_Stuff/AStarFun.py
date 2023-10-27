@@ -5,19 +5,16 @@ Created on Wed Sep  6 12:44:18 2023
 @author: Jarod
 """
 
-from AStar import AStarFunTime as Asf
-import numpy as np
+from unmanned_systems_ros2_pkg import AStarFunTime as Asf
 
+def merge(x,y):
+    merged_list = [(x[i], y[i]) for i in range(0, len(x))]
+    return merged_list
 
-def AStarFun(map:list,obs_x:list,obs_y:list,obstacle_radius:float,start:tuple,finish:tuple,robot_radius:float):
+def AStarFun(map:list,obstacle_positions:list,obstacle_radius:float,start:tuple,finish:tuple,robot_radius:float):
     
-    # map list [(xmin,xmax),(ymin,ymax),gs]
-    # obstacle list = [(x,y),(x,y),(x,y)]
-    # start = (x,y)
-    # finish = (x,y)
 
-    obstacle_positions = Asf.merge(obs_x,obs_y)
-    
+
     obstacle_list = [] # Store obstacle objects
     
     xmin = map[0][0]
@@ -49,7 +46,7 @@ def AStarFun(map:list,obs_x:list,obs_y:list,obstacle_radius:float,start:tuple,fi
     parent_index = Asf.compute_index(xmin,xmax,ymin,ymax,gs,x_finish,y_finish)
     last_node = Asf.node(x_finish,y_finish,heur_scan,parent_index,heur_scan**2)
     unvisited[parent_index] = last_node
-
+    current_index = Asf.compute_index(xmin,xmax,ymin,ymax,gs,x_start,y_start)
     current_node = Asf.node(x_start,y_start,0,-1,heur_scan)
     index = Asf.compute_index(xmin,xmax,ymin,ymax,gs,current_node.x,current_node.y)
     
@@ -102,33 +99,15 @@ def AStarFun(map:list,obs_x:list,obs_y:list,obstacle_radius:float,start:tuple,fi
         current_node = unvisited.pop(index)
         if parent_index in visited.keys():
             break
-
-                    
+    path = []                
     # Getting cordinates from finish to start    
     while parent_index != -1:
         back = visited[parent_index]
-
+        path.append(back)
         x_list.append(back.x)
         y_list.append(back.y)
-        
         parent_index = back.parent_index
 
+    cord_list = merge(x_list,y_list)
 
-    cord_list = Asf.merge(x_list,y_list)
-    final_cost = 0
-    
-    look = len(cord_list)-1
-    
-    for t in range(look):
-        Ax = cord_list[t][0]
-        Ay = cord_list[t][1]
-        Bx = cord_list[t+1][0]
-        By = cord_list[t+1][1]
-        
-        
-        final_cost += Asf.distance(Ax,Bx,Ay,By) 
-    
-    
-
-
-    return (cord_list, final_cost)
+    return cord_list
