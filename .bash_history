@@ -123,3 +123,6 @@ git push
 git add .
 git commit -m "an update for Homework 5"
 git push
+git add .
+git commit -m "TSP problem 3 upload"
+git push
