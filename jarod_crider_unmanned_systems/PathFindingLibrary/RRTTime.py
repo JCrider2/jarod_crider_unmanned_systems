@@ -27,7 +27,7 @@ Obs_r = 0.25
 
 RoboR = 0.5
 
-Step_Size = 1
+Step_Size = 0.5
 
 
 stuff = RRT.RRT(map,Obstacle_x,Obstacle_y,Obs_r,start,finish,RoboR,Step_Size)

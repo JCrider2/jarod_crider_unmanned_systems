@@ -9,6 +9,8 @@ from AStar import AStarFunTime as Asf
 import numpy as np
 
 
+
+
 def AStarFun(map:list,obs_x:list,obs_y:list,obstacle_radius:float,start:tuple,finish:tuple,robot_radius:float):
     
     # map list [(xmin,xmax),(ymin,ymax),gs]
@@ -128,7 +130,7 @@ def AStarFun(map:list,obs_x:list,obs_y:list,obstacle_radius:float,start:tuple,fi
         
         final_cost += Asf.distance(Ax,Bx,Ay,By) 
     
+    cord_list.reverse()
     
 
-
-    return (cord_list, final_cost)
+    return (final_cost, cord_list)
