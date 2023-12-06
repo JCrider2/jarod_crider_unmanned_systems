@@ -12,7 +12,7 @@ def DijkstraFun(map:list,obstacle_x:list,obstacle_y:list,obstacle_radius:float,s
     obstacle_positions = Dft.merge(obstacle_x,obstacle_y)
     
     obstacle_list = [] # Store obstacle objects
-    
+    # map = [(xmin,xmax),(ymin,ymax),gs]
     xmin = map[0][0]
     xmax = map[0][1]   # Map Sizing
     ymin = map[1][0]  

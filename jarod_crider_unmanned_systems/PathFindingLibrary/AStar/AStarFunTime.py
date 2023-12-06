@@ -13,6 +13,7 @@ Created on Wed Sep  6 12:42:44 2023
 
 import numpy as np
 
+
 """
     - node data class
         - Attributes
@@ -65,6 +66,7 @@ Dijkstra's Algorithm Pseudo
         -Blackbox
             - Sqrt numpy
 """
+
 def distance(x1:float,x2:float,y1:float,y2:float):
     out = np.sqrt((x2-x1)**2+(y1-y2)**2)
     return out
@@ -80,6 +82,7 @@ def distance(x1:float,x2:float,y1:float,y2:float):
             True - inbounds, no object
             False - out of bounds or object interference
 """      
+
 def valid_check(x_min:float,x_max:float,y_min:float,y_max:float,
                   x_curr:float,y_curr:float,obst_list:list,robot_radius:float=0.0):    
     for jar in obst_list:
@@ -94,6 +97,7 @@ def valid_check(x_min:float,x_max:float,y_min:float,y_max:float,
         - Inputs
             - graph size min_x, max_x, min_y, max_y, gs, curr_x, curr_y
 """
+
 def compute_index(min_x:float, max_x:float, min_y:float, max_y:float,
                   gs:float, curr_x:float, curr_y:int):
     

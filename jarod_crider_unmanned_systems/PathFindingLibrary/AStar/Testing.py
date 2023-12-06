@@ -1,35 +1,33 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Sep  6 12:44:18 2023
+Created on Tue Dec  5 22:34:31 2023
 
 @author: Jarod
 """
 
-from AStar import AStarFunTime as Asf
+import AStarFunTime as Asf
+import numpy as np
+import matplotlib.pyplot as plt
 
-
-def AStarFun(map:list,obs_x:list,obs_y:list,obstacle_radius:float,start:tuple,finish:tuple,robot_radius:float,bob:bool=False):
+if __name__ == "__main__":
     
-    # map list [(xmin,xmax),(ymin,ymax),gs]
-    # obstacle list = [(x,y),(x,y),(x,y)]
-    # start = (x,y)
-    # finish = (x,y)
-
-    obstacle_positions = Asf.merge(obs_x,obs_y)
-    
+    obstacle_positions = [(2, 2), (2, 3), (2, 4), (2, 5), (0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (5, 2), (5, 3), (5, 4), (5, 5), (8, 2), (9, 2), (10, 2), (11, 2), (12, 2), (13, 2), (8, 3), (8, 4), (8, 5), (8, 6), (8, 7), (8, 8), (8, 9), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (9, 6), (10, 6), (11, 6), (12, 6), (15, 6), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (2, 13), (5, 9), (5, 10), (5, 11), (5, 12), (5, 13), (6, 12), (7, 12), (8, 12), (9, 12), (10, 12), (11, 12), (12, 8), (12, 9), (12, 10), (12, 11), (12, 12)]
     obstacle_list = [] # Store obstacle objects
+    obstacle_radius = 0.0
     
-    xmin = map[0][0]
-    xmax = map[0][1]   # Map Sizing
-    ymin = map[1][0]  
-    ymax = map[1][1]
-    gs = map[2]
+    xmin = 0
+    xmax = 15   # Map Sizing
+    ymin = 0
+    ymax = 15
+    gs = 0.5
     
-    x_start = start[0]
-    y_start = start[1] # Start
+    x_start = 9
+    y_start = 4 # Start
     
-    x_finish = finish[0] # Finish
-    y_finish = finish[1]
+    x_finish = 9.0 # Finish
+    y_finish = 7.0
+
+    robot_radius = 0.5
     
     # Change obstalce's from list of tuples into list of objects
     for obs_pos in obstacle_positions:
@@ -48,13 +46,13 @@ def AStarFun(map:list,obs_x:list,obs_y:list,obstacle_radius:float,start:tuple,fi
     parent_index = Asf.compute_index(xmin,xmax,ymin,ymax,gs,x_finish,y_finish)
     last_node = Asf.node(x_finish,y_finish,heur_scan,parent_index,heur_scan**3)
     unvisited[parent_index] = last_node
-
+    current_index = Asf.compute_index(xmin,xmax,ymin,ymax,gs,x_start,y_start)
     current_node = Asf.node(x_start,y_start,0,-1,heur_scan)
     index = Asf.compute_index(xmin,xmax,ymin,ymax,gs,current_node.x,current_node.y)
     
     
     # This While loop is Dijkstra's, assembles visted dictionary with object having parent index, and cost
-    while 1 == 1:
+    while unvisited:
         
         for j in range(-1,2):       # 3x3 grid check
             for i in range(-1,2):
@@ -100,44 +98,35 @@ def AStarFun(map:list,obs_x:list,obs_y:list,obstacle_radius:float,start:tuple,fi
         index = min(unvisited, key=lambda x:unvisited[x].heuretic_cost)
         current_node = unvisited.pop(index)
         if parent_index in visited.keys():
-            del unvisited
             break
-
-        
-    # Getting cordinates from finish to start    
-    while parent_index != -1:
+    path = []                
+    # Getting cordinates from finish to start
+    dot = Asf.compute_index(xmin,xmax,ymin,ymax,gs,x_start,y_start)
+    while parent_index != dot:
         back = visited[parent_index]
-
+        path.append(back)
         x_list.append(back.x)
         y_list.append(back.y)
-        
         parent_index = back.parent_index
 
 
-    cord_list = Asf.merge(x_list,y_list)
-    final_cost = 0
-    
-    look = len(cord_list)-1
-    
-    for t in range(look):
-        Ax = cord_list[t][0]
-        Ay = cord_list[t][1]
-        Bx = cord_list[t+1][0]
-        By = cord_list[t+1][1]
+    # Plotting/Graphing
+    fig, ax = plt.subplots()
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 10)
+
+    x_list = np.array(x_list)
+    y_list = np.array(y_list)
+    plt.plot(x_list,y_list)
+
+
+    for rob in path:
+        rob_plot = plt.Circle((rob.x,rob.y), robot_radius, color="red")
+        ax.add_patch(rob_plot)
+
+    for obs in obstacle_list:
+        obs_plot = plt.Circle((obs.x_pos, obs.y_pos), obs.radius, color="blue")
+        ax.add_patch(obs_plot)
         
-        
-        final_cost += Asf.distance(Ax,Bx,Ay,By) 
-    
-    cord_list.reverse()
-    
-    if bob == False:
-
-        return (final_cost, [(0,0)])
-    else:
-
-        return (final_cost, cord_list)
-
-
-
-
-
+    plt.grid()
+    plt.show()

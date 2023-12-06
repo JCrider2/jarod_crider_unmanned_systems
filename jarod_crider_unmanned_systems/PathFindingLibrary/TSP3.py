@@ -10,22 +10,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 from timeit import default_timer as timer
 
-
+star = timer()
 
 maps = [(0,15),(0,15),0.5]
 
 
-start = (0,0)
-points = [(9,1),(4,4),(1,9),(9,7),(6,14)]
+start = (1,1)
+
+#points = [(9,7),(1,9),(4,4),(9,4)]
+#points = [(9,7),(1,9),(4,4),(9,4),(6,14),(3,11),(14,1)]
+points = [(9,7),(1,9),(4,4),(9,4),(6,14),(3,11),(14,1),(1,14),(14,14),(7,10)]
+
+
 rad = 0.5
 obr = 0.0
 
-ox = [2, 2, 2, 2, 0, 1, 2, 3, 4, 5, 5, 5, 5, 5, 8, 9, 10, 11, 12, 13, 8, 8, 8,
-      8, 8, 8, 8, 2, 3, 4, 5, 6, 9, 10, 11, 12, 15, 2, 2, 2,  2,  2,  2,  5, 5,
-      5,  5,  5,  5,  5,  6,  7,  8,  9,  10, 11, 12, 12, 12, 12, 12]
-oy = [2, 3, 4, 5, 5, 5, 5, 5, 5, 5, 2, 3, 4, 5, 2, 2, 2,  2,  2,  2,  3, 4, 5,
-      6, 7, 8, 9, 7, 7, 7, 7, 7, 6, 6,  6,  6,  6,  8, 9, 10, 11, 12, 13, 9, 10,
-      11, 12, 13, 14, 15, 12, 12, 12, 12, 12, 12, 8,  9,  10, 11, 12]
+ox = [2, 2, 2, 2, 0, 1, 2, 3, 4, 5, 5, 5, 5, 5, 8, 9, 10, 11, 12, 13, 8, 8, 8, 8, 8, 8, 8, 2, 3, 4, 5, 6, 9, 10, 11, 12, 15, 2, 2, 2,  2,  2,  2,  5, 5,  5,  5,  5,  6,  7,  8,  9,  10, 11, 12, 12, 12, 12, 12]
+oy = [2, 3, 4, 5, 5, 5, 5, 5, 5, 5, 2, 3, 4, 5, 2, 2, 2,  2,  2,  2,  3, 4, 5, 6, 7, 8, 9, 7, 7, 7, 7, 7, 6, 6,  6,  6,  6,  8, 9, 10, 11, 12, 13, 9, 10, 11, 12, 13, 12, 12, 12, 12, 12, 12, 8,  9,  10, 11, 12]
 
 
 
@@ -79,6 +80,8 @@ index = np.array(cost_list).argmin()
 
 minperm = perm[index]
 
+
+
 cord_list = begin[minperm[0]][1]
 
 # this compiles cord list together from found lowest cost perm
@@ -92,11 +95,11 @@ print('ending', timer()-end)
 x_list = np.array(list(map(lambda x: x[0], cord_list)))
 y_list = np.array(list(map(lambda y: y[1], cord_list)))
 
-des_x = np.array([0,9,4,1,9,6])
-des_y = np.array([0,1,4,9,7,14])
+des_x = np.array([1,9,1,4,9,6,3,14,1,14,7])
+des_y = np.array([1,7,9,4,4,14,11,1,14,14,10])
 
 plt.plot(x_list,y_list)
 plt.plot(ox,oy,'o')
 plt.plot(des_x,des_y,'x')
 plt.show()
-
+print("total time to calculate", timer() - star)

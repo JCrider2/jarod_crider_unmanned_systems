@@ -126,3 +126,11 @@ git push
 git add .
 git commit -m "TSP problem 3 upload"
 git push
+git add .
+git commit -m "TSP problem 3 update, with updating other programs"
+git push
+git push
+git commit
+git push
+git pull
+git push
