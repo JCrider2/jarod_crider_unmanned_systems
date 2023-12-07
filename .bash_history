@@ -134,3 +134,6 @@ git commit
 git push
 git pull
 git push
+git add .
+git commit -m "Adding TSP3 and change to AStar"
+git push
